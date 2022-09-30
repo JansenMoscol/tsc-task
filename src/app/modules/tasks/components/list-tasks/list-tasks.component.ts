@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectUser } from 'src/app/state/app.selectors';
 
 @Component({
   selector: 'app-list-tasks',
@@ -8,24 +11,27 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class ListTasksComponent implements OnInit {
 
+  user$ = this.store.select(selectUser);
+
   formTask = new FormGroup({
     name: new FormControl('', [Validators.required]),
   });
 
-  constructor() { }
+  constructor(
+    private store: Store,
+  ) { }
 
   ngOnInit(): void {
+    this.user$.subscribe((user) => {
+      console.log(user)
+      if (user.user === "") alert('mal')
+    })
   }
 
-  onLogin() {
+  addTask() {
 
     const form = this.formTask.value
 
-    if (form.user === "test01" && form.password === "test01") {
-      alert('ok')
-    } else {
-      alert('Credenciales incorrectas')
-    }
   }
 
 }

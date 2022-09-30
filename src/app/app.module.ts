@@ -8,6 +8,7 @@ import { FormComponent } from './modules/login/components/form/form.component';
 import { ListTasksComponent } from './modules/tasks/components/list-tasks/list-tasks.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
+import { userReducer } from './state/reducers/user.reducer';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { StoreModule } from '@ngrx/store';
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ user: userReducer }),
   ],
   providers: [],
   bootstrap: [AppComponent]

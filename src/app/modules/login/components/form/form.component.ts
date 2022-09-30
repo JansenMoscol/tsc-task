@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { loginUser } from 'src/app/state/actions/user.actions';
 
 @Component({
   selector: 'app-form',
@@ -9,11 +12,14 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class FormComponent implements OnInit {
 
   formLogin = new FormGroup({
-    user: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    user: new FormControl('test01', [Validators.required]),
+    password: new FormControl('test01', [Validators.required]),
   });
 
-  constructor() { }
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
   }
@@ -23,7 +29,11 @@ export class FormComponent implements OnInit {
     const form = this.formLogin.value
 
     if (form.user === "test01" && form.password === "test01") {
-      alert('ok')
+
+      this.store.dispatch(loginUser(form))
+
+      this.router.navigate(['/tasks'])
+
     } else {
       alert('Credenciales incorrectas')
     }

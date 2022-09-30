@@ -19,10 +19,15 @@ export const tasksReducer = createReducer(
     on(removeTask, (state, { id }) => state.filter(i => i.id !== id)),
 
     on(changeStatusTask, (state, { id }) => {
-        const index = state.findIndex(i => i.id === id)
+        return state.map(item => {
+            if (item.id === id) {
+                return {
+                    ...item,
+                    isChecked: !item.isChecked
+                }
+            }
 
-        state[index].isChecked = !state[index].isChecked
-
-        return state
+            return item
+        })
     }),
 );

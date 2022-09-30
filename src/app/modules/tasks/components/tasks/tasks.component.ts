@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { addTask } from 'src/app/state/actions/tasks.actions';
 import { selectTasks, selectUser } from 'src/app/state/app.selectors';
@@ -15,17 +16,18 @@ export class TasksComponent implements OnInit {
   tasks$ = this.store.select(selectTasks);
 
   formTask = new FormGroup({
-    name: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required, Validators.pattern(/^[a-z\d\s]+$/i)]),
   });
 
   constructor(
     private store: Store,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
-    // this.user$.subscribe((user) => {
-    // if (user.user === "") alert('mal')
-    // })
+    this.user$.subscribe((user) => {
+      if (user.user === "") this.router.navigate(['/'])
+    })
   }
 
   addTask() {

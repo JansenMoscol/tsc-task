@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Task } from 'src/app/commons/models/Task';
-import { removeTask } from 'src/app/state/actions/tasks.actions';
+import { changeStatusTask, removeTask } from 'src/app/state/actions/tasks.actions';
 import { selectTasks } from 'src/app/state/app.selectors';
 
 @Component({
@@ -26,6 +26,11 @@ export class ListTasksComponent implements OnInit {
   removeTask(task: Task) {
 
     this.store.dispatch(removeTask({ id: task.id }))
+  }
+
+  onChangeStatus(task: Task) {
+
+    this.store.dispatch(changeStatusTask({ id: task.id }))
   }
 
 }

@@ -7,12 +7,12 @@
             <div class="row justify-content-between mb-2" *ngFor="let task of tasks$ | async">
 
                 <div class="col-2">
-                    <input type="checkbox" name="" id="" [value]="task.isChecked">
+                    <input type="checkbox" [name]="task.id" [checked]="task.isChecked" (change)="onChangeStatus(task)">
                 </div>
                 <div class="col-8">{{task.name}}</div>
 
                 <div class="col-2">
-                    <button class="btn btn-danger btn-sm" (click)="removeTask(task)">X</button>
+                    <button *ngIf="!task.isChecked" class="btn btn-danger btn-sm" (click)="removeTask(task)">X</button>
                 </div>
             </div>
 

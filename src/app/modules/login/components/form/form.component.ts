@@ -12,8 +12,8 @@ import { loginUser } from 'src/app/state/actions/user.actions';
 export class FormComponent implements OnInit {
 
   formLogin = new FormGroup({
-    user: new FormControl('test01', [Validators.required]),
-    password: new FormControl('test01', [Validators.required]),
+    user: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
   });
 
   constructor(

@@ -9,19 +9,22 @@ import { ListTasksComponent } from './modules/tasks/components/list-tasks/list-t
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './state/reducers/user.reducer';
+import { TasksComponent } from './modules/tasks/components/tasks/tasks.component';
+import { tasksReducer } from './state/reducers/tasks.reducer';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
-    ListTasksComponent
+    ListTasksComponent,
+    TasksComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({ user: userReducer }),
+    StoreModule.forRoot({ user: userReducer, tasks: tasksReducer }),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormComponent } from './modules/login/components/form/form.component';
-import { ListTasksComponent } from './modules/tasks/components/list-tasks/list-tasks.component';
+import { TasksComponent } from './modules/tasks/components/tasks/tasks.component';
 
 const routes: Routes = [
   { path: '', component: FormComponent },
-  { path: 'tasks', component: ListTasksComponent },
+  { path: 'tasks', component: TasksComponent },
 ];
 
 @NgModule({

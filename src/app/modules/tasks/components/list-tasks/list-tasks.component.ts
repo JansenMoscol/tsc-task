@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectUser } from 'src/app/state/app.selectors';
+import { Task } from 'src/app/commons/models/Task';
+import { removeTask } from 'src/app/state/actions/tasks.actions';
+import { selectTasks } from 'src/app/state/app.selectors';
 
 @Component({
   selector: 'app-list-tasks',
@@ -11,27 +11,21 @@ import { selectUser } from 'src/app/state/app.selectors';
 })
 export class ListTasksComponent implements OnInit {
 
-  user$ = this.store.select(selectUser);
-
-  formTask = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-  });
+  tasks$ = this.store.select(selectTasks)
 
   constructor(
     private store: Store,
   ) { }
 
   ngOnInit(): void {
-    this.user$.subscribe((user) => {
-      console.log(user)
-      if (user.user === "") alert('mal')
+    this.tasks$.subscribe((res) => {
+      console.log(res)
     })
   }
 
-  addTask() {
+  removeTask(task: Task) {
 
-    const form = this.formTask.value
-
+    this.store.dispatch(removeTask({ id: task.id }))
   }
 
 }

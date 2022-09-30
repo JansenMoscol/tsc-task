@@ -4,7 +4,7 @@ import { User } from '../commons/models/User';
 
 export const selectUser = createFeatureSelector<User>('user');
 
-export const selectTasks = createFeatureSelector<Array<Task>>('tasks');
+export const selectTasks = createFeatureSelector<ReadonlyArray<Task>>('tasks');
 
 // export const selectBookCollection = createSelector(
 //     selectUser,
